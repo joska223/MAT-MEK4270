@@ -2,10 +2,28 @@ import numpy as np
 
 
 def differentiate(u: np.ndarray, dt: float) -> np.ndarray:
-    raise NotImplementedError
+    n = len(u)
+    du = np.zeros(n)
+
+    du[0] = (u[1]-u[0])/dt
+    du[n-1] = (u[n-1]-u[n-2])/dt
+
+    for i in range(1,n-1):
+        du[i] = (u[i+1]-u[i-1])/(2*dt)
+
+    return du
+    
 
 def differentiate_vector(u: np.ndarray, dt: float) -> np.ndarray:
-    raise NotImplementedError
+    n = len(u)
+    du = np.zeros(n)
+
+    du[0] = (u[1]-u[0])/dt
+    du[n-1] = (u[n-1]-u[n-2])/dt
+
+    du[1:n-1] = (u[2:n]-u[0:n-2])/(2*dt)
+
+    return du
 
 def test_differentiate():
     t = np.linspace(0, 1, 10)

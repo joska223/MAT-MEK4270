@@ -1,14 +1,24 @@
 from collections.abc import Callable
 
 import numpy as np
+from matplotlib import pyplot
 
 
 def mesh_function(f: Callable[[float], float], t: np.ndarray) -> np.ndarray:
-    raise NotImplementedError
+    func_array = np.zeros(len(t))
+    for i in range(len(t)):
+        func_array[i] = f(t[i])
 
+    return func_array
 
 def func(t: float) -> float:
-    raise NotImplementedError
+    if 0<=t and t<= 3:
+        return np.exp(-t)
+    elif 3<t and t<=4:
+        return np.exp(-3*t)
+    else:
+        raise ValueError
+
 
 
 def test_mesh_function():
